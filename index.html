@@ -11,6 +11,7 @@
 	<body>
 		<div id = "container"></div>
 		<script src="lib/vizi.js"></script>
+		<script src = "js/constants.js"></script>
 		<script src="lib/VRControls.js"></script>
 		<script src="lib/VREffect.js"></script>
 		<script src="lib/DeviceOrientationControls.js"></script>
@@ -21,12 +22,13 @@
 		<script src="lib/Loader.js"></script>
 		<script src="lib/ShaderLoader.js"></script>
 		<script src="lib/jquery.min.js"></script>
+		<script src="lib/stats.js"></script>
 
-		<script src = "js/constants.js"></script>
-		<script src = "js/primitive.js"></script>
-		<script src = "js/flight_path_script.js"></script>
-		<script src = "js/arc.js"></script>
-		<script src = "js/fresnal.js"></script>
+		<script src = "js/scripts/flightpath.js"></script>
+		<script src = "js/scripts/tracker.js"></script>
+
+		<script src = "js/cloners/clonermanager.js"></script>
+		<script src = "js/cloners/arccloner.js"></script>
 		<script src = "js/infoworld.js"></script>
 
 		<script>
@@ -34,7 +36,6 @@
 		  var infoworld = new InfoWorld({
 		  	container: container
 		  });
-		  infoworld.run()
 		</script>
 
 	</body>

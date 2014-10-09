@@ -71,34 +71,43 @@ goog.inherits(InfoWorld, Vizi.Application)
 
 InfoWorld.prototype.init = function(param) {
   //tracker obj 
+  G.stats = new Stats();
+  G.stats.domElement.style.position = 'absolute';
+  G.stats.domElement.style.left = '0px';
+  G.stats.domElement.style.top = '0px';
+  document.body.appendChild(G.stats.domElement);
+  
+  G.app = Vizi.Application.instance;
 
 
-  var dolly = new Vizi.Object()
-  dolly.transform.position.set(500, 500, 500)
+
+  G.dolly = new Vizi.Object()
+  G.dolly.transform.position.set(500, 500, 500)
   var flightPath = new FlightPathScript(G.cameraPath)
-  dolly.addComponent(flightPath)
-  this.addObject(dolly)
+  this.addObject(G.dolly)
+  G.dolly.addComponent(flightPath)
 
   var cam = new Vizi.PerspectiveCamera();
   cam.far = 100000;
   cam.near = 1;
-  cam.fov =75;
+  cam.fov = 75;
 
   var camera = new Vizi.Object();
   camera.addComponent(cam);
   cam.active = true;
-  dolly.addChild(camera);
+  G.dolly.addChild(camera);
 
-  var realCam = camera._components[1].object
+  G.camera = camera._components[1].object
   if (parameters.mode === 'cardboard') {
-    G.controls = new THREE.DeviceOrientationControls(realCam);
+    G.controls = new THREE.DeviceOrientationControls(G.camera);
     // effect = new THREE.StereoEffect(G.renderer);
 
   } else {
 
-    G.controls = new THREE.VRControls(realCam);
+    G.controls = new THREE.VRControls(G.camera);
     // effect = new THREE.VREffect(G.renderer);
   }
+
 
   var vSceneObj = new Vizi.Object();
   var visual = new Vizi.Visual({
@@ -109,5 +118,7 @@ InfoWorld.prototype.init = function(param) {
 
   this._services[4].scene.fog = new THREE.Fog(0x00000, -4000, 80000)
 
-}
 
+  var cloners = new G.ClonerManager();
+
+}
