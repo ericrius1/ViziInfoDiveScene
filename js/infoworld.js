@@ -12,13 +12,11 @@ InfoWorld = function(param) {
   Vizi.Application.call(this, param);
 
   G.loader = new Loader();
-  var controls, effect;
+  var effect;
 
   var controls2, clock = new THREE.Clock();
 
   var sky, water;
-
-  var cameraPath;
 
   G.primitives = {}
 
@@ -36,7 +34,7 @@ InfoWorld = function(param) {
   G.loader.addLoad();
   c4dLoader.load('models/campath-3.txt', function(line) {
     G.loader.onLoad();
-    cameraPath = line;
+    G.cameraPath = line;
 
   });
 
@@ -72,17 +70,35 @@ InfoWorld = function(param) {
 goog.inherits(InfoWorld, Vizi.Application)
 
 InfoWorld.prototype.init = function(param) {
+  //tracker obj 
+
+
+  var dolly = new Vizi.Object()
+  dolly.transform.position.set(500, 500, 500)
+  var flightPath = new FlightPathScript(G.cameraPath)
+  dolly.addComponent(flightPath)
+  this.addObject(dolly)
+
   var cam = new Vizi.PerspectiveCamera();
   cam.far = 100000;
   cam.near = 1;
-  cam.fov = 45;
+  cam.fov =75;
 
   var camera = new Vizi.Object();
   camera.addComponent(cam);
   cam.active = true;
-  this.addObject(camera);
+  dolly.addChild(camera);
 
-  camera.transform.position.set(0,2,4);
+  var realCam = camera._components[1].object
+  if (parameters.mode === 'cardboard') {
+    G.controls = new THREE.DeviceOrientationControls(realCam);
+    // effect = new THREE.StereoEffect(G.renderer);
+
+  } else {
+
+    G.controls = new THREE.VRControls(realCam);
+    // effect = new THREE.VREffect(G.renderer);
+  }
 
   var vSceneObj = new Vizi.Object();
   var visual = new Vizi.Visual({
@@ -91,109 +107,7 @@ InfoWorld.prototype.init = function(param) {
   vSceneObj.addComponent(visual);
   this.addObject(vSceneObj);
 
-  // var ground = new Vizi.Object();
-  // var visual = new Vizi.Visual({
-  //   geometry: new THREE.PlaneGeometry(2000, 2000, 100, 100),
-  //   material: new THREE.MeshBasicMaterial({
-  //     color: 0x0000ff,
-  //     transparent: true,
-  //     opacity: 1,
-  //     wireframe: true
-  //   })
-  // })
-  // ground.addComponent(visual);
-  // ground.transform.rotation.x = -Math.PI / 2
-  // this.addObject(ground)
+  this._services[4].scene.fog = new THREE.Fog(0x00000, -4000, 80000)
 
 }
 
-
-
-// G.scene = new THREE.Scene();
-// G.scene.fog = new THREE.Fog(0x00000, -4000, 80000);
-// G.init = function() {
-//   // this.createPrimitives();
-//   G.renderer = new THREE.WebGLRenderer({
-//     antialias: true
-//   });
-//   G.renderer.autoClear = false;
-//   document.body.appendChild(G.renderer.domElement);
-
-//   dolly = new THREE.Object3D();
-//   dolly.position.set(500, 500, 500);
-//   G.scene.add(dolly);
-
-//   G.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000000);
-//   dolly.add(G.camera);
-
-//   if (parameters.mode === 'cardboard') {
-
-//     controls = new THREE.DeviceOrientationControls(G.camera);
-//     effect = new THREE.StereoEffect(G.renderer);
-
-//   } else {
-
-//     controls = new THREE.VRControls(G.camera);
-//     effect = new THREE.VREffect(G.renderer);
-
-//   }
-
-//   effect.setSize(window.innerWidth, window.innerHeight);
-
-//   document.body.addEventListener('dblclick', function() {
-
-//     effect.setFullScreen(true);
-
-//   });
-
-
-
-//   G.scene.add(G.sceneObj);
-
-
-
-// }
-// G.createPrimitives = function() {
-//   G.primitives['arc'] = new G.Arc();
-//   G.primitives['fresnal'] = new G.Fresnal();
-//   _.each(G.primitiveData, function(data, name) {
-//     if (G.primitives[name]) {
-//       G.primitives[name].init(data.numClones, data.positionData, data.sizeRange);
-//     }
-//   })
-// }
-
-// G.onResize = function() {
-
-//   G.camera.aspect = window.innerWidth / window.innerHeight;
-//   G.camera.updateProjectionMatrix();
-
-//   effect.setSize(window.innerWidth, window.innerHeight);
-
-// }
-
-// G.animate = function() {
-
-//   requestAnimationFrame(this.animate);
-//   if (cameraPath !== undefined) {
-//     // adjust the number after "performance.now() /" to slow down the animation speed.
-//     var time = (performance.now() / 160000) % 1;
-
-//     var pointA = cameraPath.getPointAt(time);
-//     var pointB = cameraPath.getPointAt(Math.min(time + 0.015, 1));
-
-//     pointA.z = -pointA.z;
-//     pointB.z = -pointB.z;
-
-//     dolly.position.copy(pointA);
-//     dolly.lookAt(pointB);
-
-//     dolly.rotateY(Math.PI); // look forward
-//   }
-
-//   controls.update();
-
-//   effect.render(G.scene, G.camera);
-
-// }.bind(G)
-// window.addEventListener('resize', G.onResize.bind(G), false);
