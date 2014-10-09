@@ -4,15 +4,7 @@
 		<title>Information Diving</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				font-family: Monospace;
-				background-color: #000;
-				color: #fff;
-				margin: 0px;
-				overflow: hidden;
-			}
-		</style>
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
 	</head>
 
 
@@ -35,6 +27,14 @@
 		<script src = "js/arc.js"></script>
 		<script src = "js/fresnal.js"></script>
 		<script src = "js/infoworld.js"></script>
+
+		<script>
+		  var container = document.getElementById('container')
+		  var infoworld = new InfoWorld({
+		  	container: container
+		  });
+		  infoworld.run()
+		</script>
 
 	</body>
 </html>
