@@ -14,17 +14,17 @@
 //   - Time elapsed since start of animation (I suppose we can do this by simply delaying creating of the cloner system with a setTimeout, or some such)
 G.ClonerManager = function(){
   this.cloners = [];
-  var cloner = new G.ArcClonerPrefab({
+  var cloner = new G.ArcCloner({
     num: 100,
     position: new THREE.Vector3(),
     posRange: {x: 100, y: 0, z: 0}
   })
-  var visibilityEffector = new VisibilityEffector(G.dolly);
+  var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 200});
   cloner.addComponent(visibilityEffector)
-  // cloner.addComponent(grower)
+
   G.app.addObject(cloner)
   cloner.addEventListener('distancethreshold', function(){
-    this.create
+    this.spawnPrimitives();
   })
 
 }
