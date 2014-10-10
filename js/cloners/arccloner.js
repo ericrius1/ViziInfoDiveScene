@@ -1,16 +1,16 @@
 G.ArcCloner = function(params) {
   Vizi.Object.call(this)
+  this.transform.position.copy(params.position)
   this.params = params;
 }
 goog.inherits(G.ArcCloner, Vizi.Object);
 
 G.ArcCloner.prototype.spawnPrimitives = function() {
   for (var i = 0; i < this.params.num; i++) {
-    var primitive = new G.ArcPrimitive();
-    var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 100});
+    var primitive = new G.ArcPrimitive(this.params);
+    var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 400});
     primitive.addComponent(visibilityEffector)
-    primitive.transform.position.x = G.rf(-100, 100)
-    G.app.addObject(primitive)
+    this.addChild(primitive)
     primitive.addEventListener('distancethreshold', function(){
       this.growStrand(0)
     }.bind(primitive));
@@ -18,13 +18,13 @@ G.ArcCloner.prototype.spawnPrimitives = function() {
 
 }
 
-G.ArcPrimitive = function() {
+G.ArcPrimitive = function(params) {
   Vizi.Object.call(this)
   this.strandMat = new THREE.ShaderMaterial({
     uniforms: {
       color: {
         type: 'c',
-        value: new THREE.Color(0xff0000)
+        value: new THREE.Color(_.sample(G.colorPalette))
       }
     },
     attributes: {
@@ -58,13 +58,14 @@ G.ArcPrimitive = function() {
   var strand = new THREE.Line(strandGeometry, this.strandMat)
   strand.scale.set(G.rf(10, 100), G.rf(10, 100), 1)
   strand.rotation.set(0, G.rf(0, Math.PI * 2), 0)
+  strand.position.set(G.rf(params.posRange.x.start, params.posRange.x.end), G.rf(params.posRange.y.start, params.posRange.y.end), G.rf(params.posRange.z.start, params.posRange.z.end));
 
   var strandObject = new Vizi.Object();
   var visual = new Vizi.Visual({
     object: strand
   });
   strandObject.addComponent(visual);
-  Vizi.Application.instance.addObject(strandObject);
+  this.addChild(strandObject);
   strand.material.attributes.opacity.needsUpdate = true
 }
 
