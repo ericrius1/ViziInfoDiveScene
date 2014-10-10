@@ -1,0 +1,68 @@
+G.TracerPrimitive = function(params) {
+  this._numSteps = 100;
+  this._step = 1 / this._numSteps;
+  Vizi.Object.call(this)
+  this.strandMat = new THREE.ShaderMaterial({
+    uniforms: {
+      color: {
+        type: 'c',
+        value: new THREE.Color(_.sample(G.colorPalette))
+      }
+    },
+    attributes: {
+      opacity: {
+        type: 'f',
+        value: []
+      },
+    },
+    vertexShader: G.shaders.vs.strand,
+    fragmentShader: G.shaders.fs.strand,
+    transparent: true,
+    depthTest: false,
+    depthWrite: false
+  });
+
+  var SUBDIVISIONS = 100;
+
+  var strandGeometry = new THREE.Geometry()
+  var points = [];
+
+  points.push(new THREE.Vector3(G.rf(-50, -40), 5, 0))
+  points.push(new THREE.Vector3(G.rf(-40, -30), 0, 0))
+  points.push(new THREE.Vector3(G.rf(-30, -20), 5, 0))
+  points.push(new THREE.Vector3(G.rf(-20, -10), 0, 0))
+  points.push(new THREE.Vector3(0, 10, 0))
+  points.push(new THREE.Vector3(G.rf(10, 20), 0, 0))
+  points.push(new THREE.Vector3(G.rf(20, 30), 5, 0))
+  points.push(new THREE.Vector3(G.rf(30, 40), 0, 0))
+  points.push(new THREE.Vector3(G.rf(40, 50), 5, 0))
+  var tracerPath = new THREE.SplineCurve3(points);
+
+  var opacity = this.strandMat.attributes.opacity.value
+  for (var j = 0; j < 1; j+=this._step) {
+    var point = tracerPath.getPoint(j)
+    strandGeometry.vertices.push(point.clone())
+    opacity.push(0.0);
+  }
+  strandGeometry.dynamic = false
+  var strand = new THREE.Line(strandGeometry, this.strandMat)
+
+  var visual = new Vizi.Visual({
+    object: strand
+  });
+  this.addComponent(visual);
+  strand.material.attributes.opacity.needsUpdate = true
+}
+
+goog.inherits(G.TracerPrimitive, Vizi.Object);
+
+G.TracerPrimitive.prototype.growStrand = function(vertexIndex) {
+  var opacity = this.strandMat.attributes.opacity;
+  opacity.value[vertexIndex++] = 1;
+  opacity.needsUpdate = true
+  if (vertexIndex === opacity.value.length) return
+
+  setTimeout(function() {
+    this.growStrand(vertexIndex);
+  }.bind(this), 30)
+}
