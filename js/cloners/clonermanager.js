@@ -15,10 +15,12 @@
 G.ClonerManager = function(){
   this.cloners = [];
   var cloner = new G.ArcCloner({
-    num: 100,
-    position: new THREE.Vector3(-100, 0, 0),
+    num: 10,
+    position: new THREE.Vector3(-10, 0, 100),
     //position range is relative to parent position
-    posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: 0, end: -100 }}
+    posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: 0, end: 200 }},
+    scaleRange: { start: 1, end: 10},
+    rotRange: {start: 0, end: Math.PI * 2},
   })
   var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 600});
   cloner.addComponent(visibilityEffector)

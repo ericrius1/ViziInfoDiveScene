@@ -46,8 +46,8 @@ G.ArcPrimitive = function(params) {
   var curve = new THREE.QuadraticBezierCurve3();
 
   curve.v0 = new THREE.Vector3(0, 0, 0);
-  curve.v1 = new THREE.Vector3(G.rf(0.1, 1), G.rf(1, 2), 0);
-  curve.v2 = new THREE.Vector3(G.rf(1, 3), 0, 0);
+  curve.v1 = new THREE.Vector3(G.rf(1, 10), G.rf(10, 20), 0);
+  curve.v2 = new THREE.Vector3(G.rf(10, 30), 0, 0);
 
   var opacity = this.strandMat.attributes.opacity.value
   for (var j = 0; j < SUBDIVISIONS; j++) {
@@ -56,16 +56,15 @@ G.ArcPrimitive = function(params) {
   }
   strandGeometry.dynamic = false
   var strand = new THREE.Line(strandGeometry, this.strandMat)
-  strand.scale.set(G.rf(10, 100), G.rf(10, 100), 1)
-  strand.rotation.set(0, G.rf(0, Math.PI * 2), 0)
-  strand.position.set(G.rf(params.posRange.x.start, params.posRange.x.end), G.rf(params.posRange.y.start, params.posRange.y.end), G.rf(params.posRange.z.start, params.posRange.z.end));
+  strand.scale.set(G.rf(params.scaleRange.start, params.scaleRange.end), G.rf(params.scaleRange.start, params.scaleRange.end), G.rf(params.scaleRange.start, params.scaleRange.end));
+  strand.rotation.set(0, G.rf(params.rotRange.start, params.rotRange.end), 0)
 
-  var strandObject = new Vizi.Object();
   var visual = new Vizi.Visual({
     object: strand
   });
-  strandObject.addComponent(visual);
-  this.addChild(strandObject);
+  this.addComponent(visual);
+  this.transform.position.set(G.rf(params.posRange.x.start, params.posRange.x.end), G.rf(params.posRange.y.start, params.posRange.y.end), G.rf(params.posRange.z.start, params.posRange.z.end));
+
   strand.material.attributes.opacity.needsUpdate = true
 }
 
