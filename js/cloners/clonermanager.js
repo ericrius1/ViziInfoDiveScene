@@ -19,6 +19,12 @@ G.ClonerManager = function(){
     position: new THREE.Vector3(),
     posRange: {x: 100, y: 0, z: 0}
   })
+  var visibilityEffector = new VisibilityEffector(G.dolly);
+  cloner.addComponent(visibilityEffector)
+  // cloner.addComponent(grower)
   G.app.addObject(cloner)
+  cloner.addEventListener('distancethreshold', function(){
+    this.create
+  })
 
 }

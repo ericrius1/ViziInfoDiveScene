@@ -1,15 +1,7 @@
 G.ArcClonerPrefab = function(params) {
   this._primitives = []
   var obj = new Vizi.Object;
-  var tracker = new TrackerScript(G.dolly);
-
-  for(var i = 0; i < params.num; i++){
-    this._primitives.push(new G.ArcPrimitive())
-  }
-  obj.addComponent(tracker)
-  obj.addEventListener('distancethreshold', function(){
-    console.log('yaa')
-  });
+  obj.params = params
   return obj;
 }
 
