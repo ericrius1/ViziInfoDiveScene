@@ -14,11 +14,12 @@
 //   - Time elapsed since start of animation (I suppose we can do this by simply delaying creating of the cloner system with a setTimeout, or some such)
 G.ClonerManager = function(){
   this.cloners = [];
-  var cloner = new G.ArcCloner({
-    num: 10,
-    position: new THREE.Vector3(-10, 0, 100),
+  var cloner = new G.Cloner({
+    primitive: G.ArcPrimitive,
+    num: 100,
+    position: new THREE.Vector3(-10, 0, 300),
     //position range is relative to parent position
-    posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: 0, end: 200 }},
+    posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -300, end: 0 }},
     scaleRange: { start: 1, end: 10},
     rotRange: {start: 0, end: Math.PI * 2},
   })
@@ -27,6 +28,7 @@ G.ClonerManager = function(){
 
   G.app.addObject(cloner)
   cloner.addEventListener('distancethreshold', function(){
+    console.log('spawn')
     this.spawnPrimitives();
   })
 

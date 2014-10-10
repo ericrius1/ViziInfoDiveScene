@@ -11,10 +11,10 @@ goog.inherits(VisibilityEffector, Vizi.Script);
 
 
 VisibilityEffector.prototype.update = function() {
-  if(!this.thresholdReached && this._object.transform.position.distanceTo(this.targetObj.transform.position) < this.params.distance){
+  var pos = new THREE.Vector3()
+  pos.setFromMatrixPosition(this._object.transform.object.matrixWorld)
+  if(!this.thresholdReached && pos.distanceTo(this.targetObj.transform.position) < this.params.distance){
     this._object.dispatchEvent('distancethreshold')
     this.thresholdReached = true;
-
-    // this._object.
   }
 }
