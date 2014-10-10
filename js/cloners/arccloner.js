@@ -7,6 +7,9 @@ G.ArcClonerPrefab = function(params) {
     this._primitives.push(new G.ArcPrimitive())
   }
   obj.addComponent(tracker)
+  obj.addEventListener('distancethreshold', function(){
+    console.log('yaa')
+  });
   return obj;
 }
 
