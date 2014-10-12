@@ -1,5 +1,5 @@
 
-G.ArcPrimitive = function(params) {
+G.FresnalPrimitive = function(params) {
   Vizi.Object.call(this)
   this.strandMat = new THREE.ShaderMaterial({
     uniforms: {
@@ -46,19 +46,9 @@ G.ArcPrimitive = function(params) {
   strand.material.attributes.opacity.needsUpdate = true
 }
 
-goog.inherits(G.ArcPrimitive, Vizi.Object);
+goog.inherits(G.FresnalPrimitive, Vizi.Object);
 
-G.ArcPrimitive.prototype.appear = function(vertexIndex) {
-  this.growStrand(0)
-}
 
-G.ArcPrimitive.prototype.growStrand = function(vertexIndex){
-  var opacity = this.strandMat.attributes.opacity;
-  opacity.value[vertexIndex++] = 1;
-  opacity.needsUpdate = true
-  if (vertexIndex === opacity.value.length) return
-
-  setTimeout(function() {
-    this.growStrand(vertexIndex);
-  }.bind(this), 30)
+G.FresnalPrimitive.prototype.appear = function(){
+  console.log('yah')
 }

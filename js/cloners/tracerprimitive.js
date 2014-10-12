@@ -56,7 +56,11 @@ G.TracerPrimitive = function(params) {
 
 goog.inherits(G.TracerPrimitive, Vizi.Object);
 
-G.TracerPrimitive.prototype.growStrand = function(vertexIndex) {
+G.TracerPrimitive.prototype.appear= function(vertexIndex) {
+  this.growStrand(0);
+}
+
+G.TracerPrimitive.prototype.growStrand = function(vertexIndex){
   var opacity = this.strandMat.attributes.opacity;
   opacity.value[vertexIndex++] = 1;
   opacity.needsUpdate = true
@@ -65,4 +69,5 @@ G.TracerPrimitive.prototype.growStrand = function(vertexIndex) {
   setTimeout(function() {
     this.growStrand(vertexIndex);
   }.bind(this), 30)
+
 }

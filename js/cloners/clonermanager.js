@@ -17,20 +17,20 @@
 G.ClonerManager = function(){
   this.cloners = [];
  
-  var cloner = new G.Cloner({
-    primitive: G.ArcPrimitive,
-    num: 100,
-    position: new THREE.Vector3(-10, 0, 300),
-    posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -300, end: 0 }},
-    scaleRange: { x: {start: 1, end: 10}, y: {start: 1, end: 10}, z:{start: 1, end: 1 }},
-    rotRange: {start: 0, end: Math.PI * 2},
-  })
-  var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 600});
-  cloner.addComponent(visibilityEffector)
-  G.app.addObject(cloner)
-  cloner.addEventListener('distancethreshold', function(){
-    this.spawnPrimitives();
-  })
+  // var cloner = new G.Cloner({
+  //   primitive: G.ArcPrimitive,
+  //   num: 100,
+  //   position: new THREE.Vector3(-10, 0, 300),
+  //   posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -300, end: 0 }},
+  //   scaleRange: { x: {start: 1, end: 10}, y: {start: 1, end: 10}, z:{start: 1, end: 1 }},
+  //   rotRange: {start: 0, end: Math.PI * 2},
+  // })
+  // var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 600});
+  // cloner.addComponent(visibilityEffector)
+  // G.app.addObject(cloner)
+  // cloner.addEventListener('distancethreshold', function(){
+  //   this.spawnPrimitives();
+  // })
 
   cloner = new G.Cloner({
     primitive: G.TracerPrimitive,
@@ -39,6 +39,21 @@ G.ClonerManager = function(){
     posRange: {x: {start: -200, end: -20}, y: {start: 20, end: 40}, z:{start: -300, end: 0 }},
     scaleRange: {x: {start: 1, end: 10}, y: {start: 1, end: 1}, z:{start: 1, end: 1 }},
   });
+  var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 600});
+  cloner.addComponent(visibilityEffector)
+  G.app.addObject(cloner)
+  cloner.addEventListener('distancethreshold', function(){
+    this.spawnPrimitives();
+  })
+
+  var cloner = new G.Cloner({
+    primitive: G.FresnalPrimitive,
+    num: 100,
+    position: new THREE.Vector3(-10, 0, 300),
+    posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -300, end: 0 }},
+    scaleRange: { x: {start: 1, end: 10}, y: {start: 1, end: 10}, z:{start: 1, end: 1 }},
+    rotRange: {start: 0, end: Math.PI * 2},
+  })
   var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 600});
   cloner.addComponent(visibilityEffector)
   G.app.addObject(cloner)
