@@ -25,41 +25,43 @@ G.ClonerManager = function(){
   //   scaleRange: { x: {start: 1, end: 10}, y: {start: 1, end: 10}, z:{start: 1, end: 1 }},
   //   rotRange: {start: 0, end: Math.PI * 2},
   // })
-  // var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 600});
+  // var visibilityEffector = new G.VisibilityEffector(G.dolly, {distance: 600});
   // cloner.addComponent(visibilityEffector)
   // G.app.addObject(cloner)
   // cloner.addEventListener('distancethreshold', function(){
   //   this.spawnPrimitives();
   // })
 
-  cloner = new G.Cloner({
-    primitive: G.TracerPrimitive,
-    num: 50,
-    position: new THREE.Vector3(10, 0, 200),
-    posRange: {x: {start: -200, end: -20}, y: {start: 20, end: 40}, z:{start: -300, end: 0 }},
-    scaleRange: {x: {start: 1, end: 10}, y: {start: 1, end: 1}, z:{start: 1, end: 1 }},
-  });
-  var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 600});
-  cloner.addComponent(visibilityEffector)
+  // cloner = new G.Cloner({
+  //   primitive: G.TracerPrimitive,
+  //   num: 50,
+  //   position: new THREE.Vector3(10, 0, 200),
+  //   posRange: {x: {start: -200, end: -20}, y: {start: 20, end: 40}, z:{start: -300, end: 0 }},
+  //   scaleRange: {x: {start: 1, end: 10}, y: {start: 1, end: 1}, z:{start: 1, end: 1 }},
+  // });
+  // var visibilityEffector = new G.VisibilityEffector({distance: 600});
+  // cloner.addComponent(visibilityEffector)
+  // G.app.addObject(cloner)
+  // cloner.addEventListener('distancethreshold', function(){
+  //   this.spawnPrimitives();
+  // })
+
+  var scale = G.rf(1, 2)
+  var cloner = new G.Cloner({
+    primitive: G.FresnalPrimitive,
+    num: 1,
+    position: new THREE.Vector3(0, 0, -100),
+    // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
+    rotRange: {start: 0, end: Math.PI * 2},
+  })
+
   G.app.addObject(cloner)
   cloner.addEventListener('distancethreshold', function(){
     this.spawnPrimitives();
   })
 
-  var scale = G.rf(1, 2)
-  var cloner = new G.Cloner({
-    primitive: G.FresnalPrimitive,
-    num: 10,
-    position: new THREE.Vector3(-10, 0, 0),
-    posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
-    scaleRange: { x: {start: scale, end: scale}, y: {start: scale, end: scale}, z:{start: scale, end: scale }},
-    rotRange: {start: 0, end: Math.PI * 2},
-  })
-  var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 600});
-  cloner.addComponent(visibilityEffector)
-  G.app.addObject(cloner)
-  cloner.addEventListener('distancethreshold', function(){
-    this.spawnPrimitives();
-  })
+
+
+  
 
 }

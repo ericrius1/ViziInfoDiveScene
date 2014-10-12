@@ -82,7 +82,9 @@ InfoWorld.prototype.init = function(param) {
 
 
   G.dolly = new Vizi.Object()
-  G.dolly.transform.position.set(500, 500, 500)
+  var startingPoint = G.cameraPath.getPointAt(0);
+  startingPoint.z = -startingPoint.z
+  G.dolly.transform.position.copy(startingPoint)
   var flightPath = new FlightPathScript(G.cameraPath)
   this.addObject(G.dolly)
   G.dolly.addComponent(flightPath)
@@ -96,6 +98,8 @@ InfoWorld.prototype.init = function(param) {
   camera.addComponent(cam);
   cam.active = true;
   G.dolly.addChild(camera);
+
+  G.scene = G.app._services[4].scene
 
   G.camera = camera._components[1].object
   if (parameters.mode === 'cardboard') {
@@ -120,5 +124,7 @@ InfoWorld.prototype.init = function(param) {
 
 
   var cloners = new G.ClonerManager();
+  //  // G.scene.updateMatrixWorld()
+  //Should be able to just update matrix world oncee before we start rendering, because then threejs renderer automatically calls this every frame... something with vizi?
 
 }
