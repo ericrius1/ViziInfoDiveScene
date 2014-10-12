@@ -46,12 +46,13 @@ G.ClonerManager = function(){
     this.spawnPrimitives();
   })
 
+  var scale = G.rf(1, 2)
   var cloner = new G.Cloner({
     primitive: G.FresnalPrimitive,
-    num: 100,
-    position: new THREE.Vector3(-10, 0, 300),
-    posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -300, end: 0 }},
-    scaleRange: { x: {start: 1, end: 10}, y: {start: 1, end: 10}, z:{start: 1, end: 1 }},
+    num: 10,
+    position: new THREE.Vector3(-10, 0, 0),
+    posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
+    scaleRange: { x: {start: scale, end: scale}, y: {start: scale, end: scale}, z:{start: scale, end: scale }},
     rotRange: {start: 0, end: Math.PI * 2},
   })
   var visibilityEffector = new VisibilityEffector(G.dolly, {distance: 600});

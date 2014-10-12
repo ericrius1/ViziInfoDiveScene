@@ -25,3 +25,4 @@ G.Cloner.prototype.spawnPrimitives = function(){
     }.bind(primitive));
   }
 }
+

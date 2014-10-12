@@ -1,54 +1,58 @@
-
 G.FresnalPrimitive = function(params) {
   Vizi.Object.call(this)
-  this.strandMat = new THREE.ShaderMaterial({
-    uniforms: {
-      color: {
-        type: 'c',
-        value: new THREE.Color(_.sample(G.colorPalette))
-      }
-    },
-    attributes: {
-      opacity: {
-        type: 'f',
-        value: []
-      },
-    },
-    vertexShader: G.shaders.vs.strand,
-    fragmentShader: G.shaders.fs.strand,
-    transparent: true,
-    depthTest: false,
-    depthWrite: false
+  this._dTheta = 0.01;
+  this._material = new THREE.PointCloudMaterial({
+    color: _.sample(G.colorPalette)
   });
+  var geometry = new THREE.Geometry();
+  var R = 100
 
-  var SUBDIVISIONS = 100;
+  for (var y = 0; y < 100; y += 1) {
+    for (var theta = 0; theta < Math.PI / 2;) {
+      var radius = Math.sqrt(R * R - y * y);
+      var x = radius * Math.cos(theta);
+      var z = radius * Math.sin(theta);
 
-  var strandGeometry = new THREE.Geometry()
-  var curve = new THREE.QuadraticBezierCurve3();
+      //probabilties decrease as we move towards sphere edges in relation to camera
 
-  curve.v0 = new THREE.Vector3(0, 0, 0);
-  curve.v1 = new THREE.Vector3(G.rf(1, 10), G.rf(10, 20), 0);
-  curve.v2 = new THREE.Vector3(G.rf(10, 30), 0, 0);
+      var p1 = G.map(theta, 0, Math.PI / 2, .5, 1);
+      var p2 = G.map(y, 0, 100, 1, 0.5);
+      if (p1 < Math.random() && p2 < Math.random()) {
 
-  var opacity = this.strandMat.attributes.opacity.value
-  for (var j = 0; j < SUBDIVISIONS; j++) {
-    strandGeometry.vertices.push(curve.getPoint(j / SUBDIVISIONS))
-    opacity[j] = 0.0;
+        geometry.vertices.push(new THREE.Vector3(x, -y, -z));
+        geometry.vertices.push(new THREE.Vector3(-x, -y, -z));
+
+        geometry.vertices.push(new THREE.Vector3(x, -y, z));
+        geometry.vertices.push(new THREE.Vector3(-x, -y, z));
+
+        geometry.vertices.push(new THREE.Vector3(x, y, -z));
+        geometry.vertices.push(new THREE.Vector3(-x, y, -z));
+
+        geometry.vertices.push(new THREE.Vector3(x, y, z));
+        geometry.vertices.push(new THREE.Vector3(-x, y, z));
+      }
+
+
+      theta += this._dTheta
+
+    }
   }
-  strandGeometry.dynamic = false
-  var strand = new THREE.Line(strandGeometry, this.strandMat)
+  var pCloud = new THREE.PointCloud(geometry, this._material)
+  pCloud.lookAt(G.dolly.transform.position);
 
   var visual = new Vizi.Visual({
-    object: strand
-  });
+    object: pCloud
+  })
+
   this.addComponent(visual);
 
-  strand.material.attributes.opacity.needsUpdate = true
+
+
 }
 
 goog.inherits(G.FresnalPrimitive, Vizi.Object);
 
 
-G.FresnalPrimitive.prototype.appear = function(){
-  console.log('yah')
+G.FresnalPrimitive.prototype.appear = function() {
+  console.log('ss')
 }
