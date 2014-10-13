@@ -26,9 +26,11 @@ G.Cloner.prototype.spawnPrimitives = function(){
     primitive.addComponent(visibilityEffector)
     this.addChild(primitive)
 
+    _.each(this.params.primitiveEffectors, function(effector){
+      primitive.addComponent(effector)
+    })
 
-    // var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
-    // primitive.addComponent(scaleEffector)
+
 
 
 

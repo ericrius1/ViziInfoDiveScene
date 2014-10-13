@@ -54,5 +54,4 @@ goog.inherits(G.FresnalPrimitive, Vizi.Object);
 
 
 G.FresnalPrimitive.prototype.appear = function() {
-  console.log('ss')
 }
