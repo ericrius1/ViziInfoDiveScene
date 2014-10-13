@@ -99,6 +99,10 @@ InfoWorld.prototype.init = function(param) {
   cam.active = true;
   G.dolly.addChild(camera);
 
+  this.controller = Vizi.Prefabs.ModelController({active: true})
+  this.controllerScript = this.controller.getComponent(Vizi.ModelControllerScript);
+  this.addObject(this.controller)
+    this.controllerScript.camera = cam;
   G.scene = G.app._services[4].scene
 
   G.camera = camera._components[1].object

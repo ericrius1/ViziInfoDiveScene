@@ -16,7 +16,11 @@ goog.inherits(G.ScaleEffector, Vizi.Script);
 
 
 G.ScaleEffector.prototype.update = function() {
-
+  
+  //Tony: For some reason I need to put updateMatrixWorld here for the first run through for object position to be correct... I should be able to put it at end of init
+  //Is it being reset somewhere within vizi before rendering?
+  // G.scene.updateMatrixWorld()
+  
   var pos = new THREE.Vector3()
   pos.setFromMatrixPosition(this._object.transform.object.matrixWorld);
   var distance = pos.distanceTo(this.params.targetObject.transform.position);
