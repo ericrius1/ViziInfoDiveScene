@@ -60,7 +60,7 @@ G.ClonerManager = function(){
   var cloner = new G.Cloner({
     primitive: G.CurveDotPrimitive,
     num: 1,
-    position: new THREE.Vector3(0, 0, 300),
+    position: new THREE.Vector3(0, 0, 200),
     // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
     rotRange: {start: 0, end: Math.PI * 2},
   })

@@ -27,8 +27,8 @@ G.Cloner.prototype.spawnPrimitives = function(){
     this.addChild(primitive)
 
 
-    var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
-    primitive.addComponent(scaleEffector)
+    // var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
+    // primitive.addComponent(scaleEffector)
 
 
 
