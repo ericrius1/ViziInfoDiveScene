@@ -9,22 +9,19 @@ G.ScaleEffector = function(params) {
   this.params.farScale = this.params.farScale || 1 //The scale of the object when it is at the far distance from the target object
   this.params.nearScale = this.params.nearScale || 10 //The scale of the object when it's at the nearest distance to the target object
 }
-
-
 goog.inherits(G.ScaleEffector, Vizi.Script);
 
 
 
 G.ScaleEffector.prototype.update = function() {
-  
   //Tony: For some reason I need to put updateMatrixWorld here for the first run through for object position to be correct... I should be able to put it at end of init
   //Is it being reset somewhere within vizi before rendering?
-  // G.scene.updateMatrixWorld()
-  
+
+  //bug with when matrix world is updated 
+
   var pos = new THREE.Vector3()
   pos.setFromMatrixPosition(this._object.transform.object.matrixWorld);
   var distance = pos.distanceTo(this.params.targetObject.transform.position);
-  console.log(distance)
 
   if(distance < this.params.farDistance && distance > this.params.nearDistance){
     console.log('scale')

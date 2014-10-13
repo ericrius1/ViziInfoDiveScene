@@ -126,9 +126,7 @@ InfoWorld.prototype.init = function(param) {
 
   this._services[4].scene.fog = new THREE.Fog(0x00000, -4000, 80000)
 
-
   var cloners = new G.ClonerManager();
-  //  // G.scene.updateMatrixWorld()
   //Should be able to just update matrix world oncee before we start rendering, because then threejs renderer automatically calls this every frame... something with vizi?
 
 }

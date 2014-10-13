@@ -32,6 +32,7 @@ G.Cloner.prototype.spawnPrimitives = function(){
 
 
 
+
     primitive.addEventListener('distancethreshold', function(){
       this.appear()
     }.bind(primitive));
