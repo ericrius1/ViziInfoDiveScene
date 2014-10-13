@@ -32,10 +32,14 @@ G.Cloner.prototype.spawnPrimitives = function(){
 
 
 
-
-    primitive.addEventListener('distancethreshold', function(){
-      this.appear()
-    }.bind(primitive));
+    if(!this.params.visibilityEffector){
+      primitive.appear();
+    }
+    else{
+      primitive.addEventListener('distancethreshold', function(){
+        this.appear()
+      }.bind(primitive)); 
+    }
   }
 }
 

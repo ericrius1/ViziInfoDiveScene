@@ -24,7 +24,6 @@ G.ScaleEffector.prototype.update = function() {
   var distance = pos.distanceTo(this.params.targetObject.transform.position);
 
   if(distance < this.params.farDistance && distance > this.params.nearDistance){
-    console.log('scale')
     var scale = G.map(distance, this.params.farDistance, this.params.nearDistance, this.params.farScale, this.params.nearScale)
     this._object.transform.scale.set(scale, scale, scale)
 

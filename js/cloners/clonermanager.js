@@ -47,18 +47,27 @@ G.ClonerManager = function(){
   // })
 
   var scale = G.rf(1, 2)
+  // var cloner = new G.Cloner({
+  //   primitive: G.FresnalPrimitive,
+  //   num: 1,
+  //   position: new THREE.Vector3(0, 0, -100),
+  //   // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
+  //   rotRange: {start: 0, end: Math.PI * 2},
+  // })
+
+  // G.app.addObject(cloner)
+
   var cloner = new G.Cloner({
-    primitive: G.FresnalPrimitive,
+    primitive: G.CurveDotPrimitive,
     num: 1,
-    position: new THREE.Vector3(0, 0, -100),
+    position: new THREE.Vector3(0, 0, 300),
     // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
     rotRange: {start: 0, end: Math.PI * 2},
   })
 
   G.app.addObject(cloner)
-  cloner.addEventListener('distancethreshold', function(){
-    this.spawnPrimitives();
-  })
+
+
 
 
 
