@@ -96,7 +96,7 @@ InfoWorld.prototype.init = function(param) {
   cam.active = true;
   G.dolly.addChild(camera);
 
-  var effect = new Vizi.Effect(new THREE.BloomPass);
+  var effect = new Vizi.Effect(new THREE.BloomPass(2));
   Vizi.Graphics.instance.addEffect(effect);
 
 
@@ -117,7 +117,7 @@ InfoWorld.prototype.init = function(param) {
       active: true,
     });
     var controllerScript2 = controller2.getComponent(Vizi.RiftControllerScript);
-    controllerScript2.camera = camera;
+    controllerScript2.camera = cam;
 
     G.app.addObject(controller2);
     // effect = new THREE.VREffect(G.renderer);

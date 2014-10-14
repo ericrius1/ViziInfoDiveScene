@@ -5,11 +5,23 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
+
+		<style>
+			.button {
+				position: fixed;
+				bottom: 20px;
+				right: 20px;
+				padding: 8px;
+				color: #FFF;
+				background-color: #555;
+			}
+		</style>
 	</head>
 
 
 	<body>
-		<div id = "container"></div>
+		<div class="button">Start VR Mode</div>
+		<div id = "container" style="z-index:-2"></div>
 		<script src="lib/vizi.js"></script>
 		<script src="lib/StereoEffect.js"></script>
 		<script src="lib/underscore.js"></script>
@@ -34,12 +46,18 @@
 		<script src = "js/infoworld.js"></script>
 
 		<script>
+		$(document).ready(function() {
 		  var container = document.getElementById('container')
 		  var infoworld = new InfoWorld({
 		  	container: container,
-		  	displayStats: true	
-		  	// riftRender: true
+		  	displayStats: true,
+		  	riftRender: true
 		  });
+		  var fullScreenButton = document.querySelector( '.button' );
+		  fullScreenButton.onclick = function() {
+			  Vizi.Graphics.instance.setFullScreen( true );
+		  };
+		});
 		</script>
 
 	</body>
