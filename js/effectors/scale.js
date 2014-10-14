@@ -22,8 +22,11 @@ G.ScaleEffector.prototype.update = function() {
   var pos = new THREE.Vector3()
   pos.setFromMatrixPosition(this._object.transform.object.matrixWorld);
   var distance = pos.distanceTo(this.params.targetObject.transform.position);
+  console.log("position",pos)
+  console.log("distance", distance)
 
   if(distance < this.params.farDistance && distance > this.params.nearDistance){
+    console.log("SCALE")
     var scale = G.map(distance, this.params.farDistance, this.params.nearDistance, this.params.farScale, this.params.nearScale)
     this._object.transform.scale.set(scale, scale, scale)
 

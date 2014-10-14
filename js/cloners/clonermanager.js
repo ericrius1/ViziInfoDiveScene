@@ -47,6 +47,8 @@ G.ClonerManager = function(){
   })
 
 
+
+  //FRESNAL PRIMITIVE******************
   var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
   var cloner = new G.Cloner({
     primitive: G.FresnalPrimitive,
