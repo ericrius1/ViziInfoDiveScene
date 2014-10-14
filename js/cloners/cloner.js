@@ -22,14 +22,11 @@ G.Cloner.prototype.spawnPrimitives = function(){
     primitive.transform.position.set(G.rf(this.params.posRange.x.start, this.params.posRange.x.end), G.rf(this.params.posRange.y.start, this.params.posRange.y.end), G.rf(this.params.posRange.z.start, this.params.posRange.z.end));
     primitive.transform.scale.set(G.rf(this.params.scaleRange.x.start, this.params.scaleRange.x.end), G.rf(this.params.scaleRange.y.start, this.params.scaleRange.y.end),G.rf(this.params.scaleRange.z.start, this.params.scaleRange.z.end));
     primitive.transform.rotation.set(0, G.rf(this.params.rotRange.start, this.params.rotRange.end), 0)
-    var visibilityEffector = new G.VisibilityEffector({distance: 200});
-    primitive.addComponent(visibilityEffector)
     this.addChild(primitive)
 
     _.each(this.params.primitiveEffectors, function(effector){
       primitive.addComponent(effector)
     })
-
 
 
 

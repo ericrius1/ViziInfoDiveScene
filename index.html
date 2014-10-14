@@ -11,9 +11,6 @@
 	<body>
 		<div id = "container"></div>
 		<script src="lib/vizi.js"></script>
-		<script src="lib/VRControls.js"></script>
-		<script src="lib/VREffect.js"></script>
-		<script src="lib/DeviceOrientationControls.js"></script>
 		<script src="lib/StereoEffect.js"></script>
 		<script src="lib/underscore.js"></script>
 		<script src="lib/C4DLineLoader.js"></script>
@@ -39,7 +36,8 @@
 		<script>
 		  var container = document.getElementById('container')
 		  var infoworld = new InfoWorld({
-		  	container: container
+		  	container: container,
+		  	riftRender: true
 		  });
 		</script>
 

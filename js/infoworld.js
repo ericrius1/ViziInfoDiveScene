@@ -76,7 +76,7 @@ InfoWorld.prototype.init = function(param) {
   G.stats.domElement.style.left = '0px';
   G.stats.domElement.style.top = '0px';
   document.body.appendChild(G.stats.domElement);
-  
+
   G.app = Vizi.Application.instance;
 
 
@@ -99,20 +99,26 @@ InfoWorld.prototype.init = function(param) {
   cam.active = true;
   G.dolly.addChild(camera);
 
-  this.controller = Vizi.Prefabs.ModelController({active: true})
+  this.controller = Vizi.Prefabs.ModelController({
+    active: true
+  })
   this.controllerScript = this.controller.getComponent(Vizi.ModelControllerScript);
   this.addObject(this.controller)
-    this.controllerScript.camera = cam;
-  G.scene = G.app._services[4].scene
+  this.controllerScript.camera = cam;
+  G.scene = Vizi.Graphics.instance.scene
 
-  G.camera = camera._components[1].object
   if (parameters.mode === 'cardboard') {
-    G.controls = new THREE.DeviceOrientationControls(G.camera);
     // effect = new THREE.StereoEffect(G.renderer);
 
   } else {
 
-    G.controls = new THREE.VRControls(G.camera);
+    var controller2 = Vizi.Prefabs.RiftController({
+      active: true,
+    });
+    var controllerScript2 = controller2.getComponent(Vizi.RiftControllerScript);
+    controllerScript2.camera = camera;
+
+    G.app.addObject(controller2);
     // effect = new THREE.VREffect(G.renderer);
   }
 
