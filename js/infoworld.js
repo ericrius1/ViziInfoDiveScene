@@ -47,7 +47,8 @@ InfoWorld = function(param) {
     surface = sceneObj.getObjectByName('surface', true)
     surface.children[0].material.wireframe = true;
     surface.children[0].material.transparent = true;
-    surface.children[0].material.opacity = 0.2;
+    surface.children[0].material.opacity = 0.05;
+    // surface.children[0].scale.z = 100
 
   });
 
@@ -71,11 +72,7 @@ goog.inherits(InfoWorld, Vizi.Application)
 
 InfoWorld.prototype.init = function(param) {
   //tracker obj 
-  G.stats = new Stats();
-  G.stats.domElement.style.position = 'absolute';
-  G.stats.domElement.style.left = '0px';
-  G.stats.domElement.style.top = '0px';
-  document.body.appendChild(G.stats.domElement);
+
 
   G.app = Vizi.Application.instance;
 
@@ -98,6 +95,10 @@ InfoWorld.prototype.init = function(param) {
   camera.addComponent(cam);
   cam.active = true;
   G.dolly.addChild(camera);
+
+  var effect = new Vizi.Effect(new THREE.BloomPass);
+  Vizi.Graphics.instance.addEffect(effect);
+
 
   this.controller = Vizi.Prefabs.ModelController({
     active: true

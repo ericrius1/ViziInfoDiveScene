@@ -20,31 +20,31 @@ G.ClonerManager = function(){
   var visibilityEffector = new G.VisibilityEffector(G.dolly, {distance: 600});
   var cloner = new G.Cloner({
     primitive: G.ArcPrimitive,
-    num: 1,
+    num: 10,
     position: new THREE.Vector3(-10, 0, 300),
     posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -300, end: 0 }},
     scaleRange: { x: {start: 1, end: 2}, y: {start: 1, end: 10}, z:{start: 1, end: 2 }},
     rotRange: {start: 0, end: Math.PI * 2},
   })
   cloner.addComponent(visibilityEffector)
-  // G.app.addObject(cloner)
+  G.app.addObject(cloner)
   cloner.addEventListener('distancethreshold', function(){
     this.spawnPrimitives();
   })
 
-  // cloner = new G.Cloner({
-  //   primitive: G.TracerPrimitive,
-  //   num: 50,
-  //   position: new THREE.Vector3(10, 0, 200),
-  //   posRange: {x: {start: -200, end: -20}, y: {start: 20, end: 40}, z:{start: -300, end: 0 }},
-  //   scaleRange: {x: {start: 1, end: 10}, y: {start: 1, end: 1}, z:{start: 1, end: 1 }},
-  // });
-  // var visibilityEffector = new G.VisibilityEffector({distance: 600});
-  // cloner.addComponent(visibilityEffector)
-  // G.app.addObject(cloner)
-  // cloner.addEventListener('distancethreshold', function(){
-  //   this.spawnPrimitives();
-  // })
+  cloner = new G.Cloner({
+    primitive: G.TracerPrimitive,
+    num: 20,
+    position: new THREE.Vector3(10, 0, 200),
+    posRange: {x: {start: -200, end: -20}, y: {start: 20, end: 40}, z:{start: -300, end: 0 }},
+    scaleRange: {x: {start: 1, end: 10}, y: {start: 1, end: 2}, z:{start: 1, end: 1 }},
+  });
+  var visibilityEffector = new G.VisibilityEffector({distance: 600});
+  cloner.addComponent(visibilityEffector)
+  G.app.addObject(cloner)
+  cloner.addEventListener('distancethreshold', function(){
+    this.spawnPrimitives();
+  })
 
 
   var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
@@ -57,7 +57,7 @@ G.ClonerManager = function(){
     primitiveEffectors: [scaleEffector]
   })
 
-  // G.app.addObject(cloner)
+  G.app.addObject(cloner)
 
   scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 2, farScale: 1})
   var cloner = new G.Cloner({
