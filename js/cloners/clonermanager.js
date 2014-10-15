@@ -33,47 +33,54 @@ G.ClonerManager = function(){
     this.spawnPrimitives();
   })
 
-  // cloner = new G.Cloner({
-  //   primitive: G.TracerPrimitive,
-  //   num: 20,
-  //   position: new THREE.Vector3(10, 0, 200),
-  //   posRange: {x: {start: -200, end: -20}, y: {start: 20, end: 40}, z:{start: -300, end: 0 }},
-  //   scaleRange: {x: {start: 1, end: 10}, y: {start: 1, end: 2}, z:{start: 1, end: 1 }},
-  // });
-  // var visibilityEffector = new G.VisibilityEffector({distance: 600});
-  // cloner.addComponent(visibilityEffector)
-  // G.app.addObject(cloner)
-  // cloner.addEventListener('distancethreshold', function(){
-  //   this.spawnPrimitives();
-  // })
+  var visibilityEffector = new G.VisibilityEffector({distance: 100})
+  var text = new G.TextPrimitive({
+    string: "hello",
+    position: new THREE.Vector3(0, 0, 200)
+  })
+  G.app.addObject(text)
+
+  cloner = new G.Cloner({
+    primitive: G.TracerPrimitive,
+    num: 20,
+    position: new THREE.Vector3(10, 0, 200),
+    posRange: {x: {start: -200, end: -20}, y: {start: 20, end: 40}, z:{start: -300, end: 0 }},
+    scaleRange: {x: {start: 1, end: 10}, y: {start: 1, end: 2}, z:{start: 1, end: 1 }},
+  });
+  var visibilityEffector = new G.VisibilityEffector({distance: 600});
+  cloner.addComponent(visibilityEffector)
+  G.app.addObject(cloner)
+  cloner.addEventListener('distancethreshold', function(){
+    this.spawnPrimitives();
+  })
 
 
 
-  // //FRESNAL PRIMITIVE******************
-  // var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
-  // var cloner = new G.Cloner({
-  //   primitive: G.FresnalPrimitive,
-  //   num: 1,
-  //   position: new THREE.Vector3(0, 0, -100),
-  //   // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
-  //   rotRange: {start: 0, end: Math.PI * 2},
-  //   primitiveEffectors: [scaleEffector]
-  // })
+  //FRESNAL PRIMITIVE******************
+  var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
+  var cloner = new G.Cloner({
+    primitive: G.FresnalPrimitive,
+    num: 1,
+    position: new THREE.Vector3(0, 0, -100),
+    // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
+    rotRange: {start: 0, end: Math.PI * 2},
+    primitiveEffectors: [scaleEffector]
+  })
 
-  // G.app.addObject(cloner)
+  G.app.addObject(cloner)
 
-  // scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 2, farScale: 1})
-  // var cloner = new G.Cloner({
-  //   primitive: G.CurveDotPrimitive,
-  //   num: 1,
-  //   position: new THREE.Vector3(0, 0, 200),
-  //   // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
-  //   rotRange: {start: 0, end: Math.PI * 2},
-  //   primitiveEffectors: [scaleEffector]
+  scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 2, farScale: 1})
+  var cloner = new G.Cloner({
+    primitive: G.CurveDotPrimitive,
+    num: 1,
+    position: new THREE.Vector3(0, 0, 200),
+    // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
+    rotRange: {start: 0, end: Math.PI * 2},
+    primitiveEffectors: [scaleEffector]
 
-  // })
+  })
 
-  // G.app.addObject(cloner)
+  G.app.addObject(cloner)
 
 
 

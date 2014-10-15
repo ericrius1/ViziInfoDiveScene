@@ -73,7 +73,6 @@ G.CurveDotPrimitive.prototype.growStrand = function(vertexIndex){
   // worldPos.applyMatrix4(this.strand.matrixWorld);
   // this.dot.transform.position.set(worldPos.x, worldPos.y, worldPos.z)
   if(vertexIndex <= this.subdivisions *this.percentFullScale){
-    console.log('move')
     var scale = G.map(vertexIndex, 0, this.subdivisions * this.percentFullScale, 0.01, 1);
     this.dot.transform.scale.set(scale, scale, scale)
   }
