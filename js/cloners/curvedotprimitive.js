@@ -1,6 +1,15 @@
-
 G.CurveDotPrimitive = function(params) {
-  Vizi.Object.call(this)
+  var obj = new Vizi.Object;
+
+  var script = new G.CurveDotPrimitiveScript(params, obj);
+  obj.addComponent(script);
+
+  return obj;
+}
+
+G.CurveDotPrimitiveScript = function(params, obj) {
+  Vizi.Script.call(this);
+
   this.subdivisions = 100
   this.dotScale = 0.01;
   this.percentFullScale = .1 // dot will be full scale by 10% of curve
@@ -43,7 +52,7 @@ G.CurveDotPrimitive = function(params) {
   var visual = new Vizi.Visual({
     object: this.strand
   });
-  this.addComponent(visual);
+  obj.addComponent(visual);
 
   this.dot = new Vizi.Object();
   visual = new Vizi.Visual({
@@ -53,21 +62,30 @@ G.CurveDotPrimitive = function(params) {
   this.dot.addComponent(visual);
   // this.dot.transform.scale.set(this.dotScale, this.dotScale, this.dotScale)
 
-  
 
   this.strand.material.attributes.opacity.needsUpdate = true
+
+  this.visible = false;
+  this.shown = false;
 }
 
-goog.inherits(G.CurveDotPrimitive, Vizi.Object);
+goog.inherits(G.CurveDotPrimitiveScript, Vizi.Script);
 
-G.CurveDotPrimitive.prototype.appear = function(vertexIndex) {
-  this.growStrand(0)
+G.CurveDotPrimitiveScript.prototype.update = function() {
+  if (this.visible && !this.shown) {
+    this.growStrand(0);
+    this.shown = true;
+  }
 }
 
-G.CurveDotPrimitive.prototype.growStrand = function(vertexIndex){
+G.CurveDotPrimitiveScript.prototype.appear = function(vertexIndex) {
+  this.visible = true;
+}
+
+G.CurveDotPrimitiveScript.prototype.growStrand = function(vertexIndex){
   if(vertexIndex === 0){
     // G.app.addObject(this.dot);
-    this.addChild(this.dot)
+    this._object.addChild(this.dot);
   }
   // var worldPos = this.strand.geometry.vertices[vertexIndex].clone();
   // worldPos.applyMatrix4(this.strand.matrixWorld);

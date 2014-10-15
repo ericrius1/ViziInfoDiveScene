@@ -1,5 +1,16 @@
 G.FresnalPrimitive = function(params) {
-  Vizi.Object.call(this)
+
+  var obj = new Vizi.Object;
+
+  var script = new G.FresnalPrimitiveScript(params, obj);
+  obj.addComponent(script);
+  return obj;
+}
+
+G.FresnalPrimitiveScript = function(params, obj) {
+  Vizi.Script.call(this, params);
+  this.params = params;
+
   this._dTheta = 0.01;
   this._material = new THREE.PointCloudMaterial({
     color: _.sample(G.colorPalette)
@@ -44,14 +55,14 @@ G.FresnalPrimitive = function(params) {
     object: pCloud
   })
 
-  this.addComponent(visual);
-
-
+  obj.addComponent(visual);
 
 }
 
-goog.inherits(G.FresnalPrimitive, Vizi.Object);
+goog.inherits(G.FresnalPrimitiveScript, Vizi.Script)
 
+G.FresnalPrimitiveScript.prototype.update = function() {
+}
 
-G.FresnalPrimitive.prototype.appear = function() {
+G.FresnalPrimitiveScript.prototype.appear = function() {
 }

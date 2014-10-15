@@ -1,6 +1,26 @@
-
 G.ArcPrimitive = function(params) {
-  Vizi.Object.call(this)
+
+  var obj = new Vizi.Object;
+
+  var script = new G.ArcPrimitiveScript();
+  obj.addComponent(script);
+ 
+
+  return obj;
+}
+
+G.ArcPrimitiveScript = function(param) {
+  Vizi.Script.call(this, param);
+
+  this.visible = false;
+  this.shown = false;
+}
+
+goog.inherits(G.ArcPrimitiveScript, Vizi.Script)
+
+G.ArcPrimitiveScript.prototype.realize = function() {
+  // Script subclasses need to implement update()
+
   this.strandMat = new THREE.ShaderMaterial({
     uniforms: {
       color: {
@@ -41,22 +61,28 @@ G.ArcPrimitive = function(params) {
   var visual = new Vizi.Visual({
     object: strand
   });
-  this.addComponent(visual);
+  this._object.addComponent(visual);
 
   strand.material.attributes.opacity.needsUpdate = true
 }
 
-goog.inherits(G.ArcPrimitive, Vizi.Object);
-
-G.ArcPrimitive.prototype.appear = function(vertexIndex) {
-  this.growStrand(0)
+G.ArcPrimitiveScript.prototype.update = function() {
+  if (this.visible && !this.shown) {
+    this.growStrand(0);
+    this.shown = true;
+  }
 }
 
-G.ArcPrimitive.prototype.growStrand = function(vertexIndex){
+G.ArcPrimitiveScript.prototype.appear = function(vertexIndex) {
+  this.visible = true;
+}
+
+G.ArcPrimitiveScript.prototype.growStrand = function(vertexIndex){
   var opacity = this.strandMat.attributes.opacity;
   opacity.value[vertexIndex++] = 1;
   opacity.needsUpdate = true
-  if (vertexIndex === opacity.value.length) return
+  if (vertexIndex === opacity.value.length) 
+    return;
 
   setTimeout(function() {
     this.growStrand(vertexIndex);

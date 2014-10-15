@@ -1,13 +1,13 @@
 G.TextPrimitive = function(params){
 
   var textPrimitive = new Vizi.Object();
-  var textScript = new G.TextScript(params);
+  var textScript = new G.TextScript(params, textPrimitive);
   textPrimitive.addComponent(textScript);
-  return textPrimitive
+  return textPrimitive;
 }
 
 
-G.TextScript = function(params){
+G.TextScript = function(params, obj){
   Vizi.Script.call(this);
   this.textScale = 5;
   this.params = params;
@@ -15,21 +15,18 @@ G.TextScript = function(params){
   this.textSpawner = new TextCreator(this.textScale)
   this.padding = 1;
 
-
-}
-goog.inherits(G.TextScript, Vizi.Script);
-
-G.TextScript.prototype.realize = function(){
   var textMesh = this.textSpawner.createMesh(this.params.string, {});
 
   var mesh = new THREE.Mesh(new THREE.SphereGeometry(100))
   var visual = new Vizi.Visual({
     object: mesh
   });
-  this._object.addComponent(visual)
-  this._object.transform.position.set(0, 10, 300)
+  obj.addComponent(visual)
+  obj.transform.position.set(0, 10, 300)
 
 }
+
+goog.inherits(G.TextScript, Vizi.Script);
 
 G.TextScript.prototype.update = function(){
   
