@@ -17,7 +17,7 @@ G.VisibilityEffector.prototype.update = function() {
   var pos = new THREE.Vector3()
   pos.setFromMatrixPosition(this._object.transform.object.matrixWorld)
   if(!this.thresholdReached && pos.distanceTo(this.params.targetObject.transform.position) < this.params.distance){
-    this._object.dispatchEvent('distancethreshold')
+    this.dispatchEvent('distancethreshold')
     this.thresholdReached = true;
   }
 }

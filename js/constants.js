@@ -1,5 +1,7 @@
 var G = {}
 
+G.camHeight = 100;
+
 G.rf = THREE.Math.randFloat;
 
 G.map = function(value, min1, max1, min2, max2) {

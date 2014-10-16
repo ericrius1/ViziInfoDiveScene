@@ -7,7 +7,7 @@ G.TracerPrimitive = function(params) {
   return obj;
 }
 
-G.TracerPrimitiveScript = function(params, obj) {
+G.TracerPrimitiveScript = function(params) {
   Vizi.Script.call(this, params);
   this.params = params;
 

@@ -7,7 +7,7 @@ G.FresnalPrimitive = function(params) {
   return obj;
 }
 
-G.FresnalPrimitiveScript = function(params, obj) {
+G.FresnalPrimitiveScript = function(params) {
   Vizi.Script.call(this, params);
   this.params = params;
 }

@@ -20,6 +20,7 @@ goog.inherits(G.ArcPrimitiveScript, Vizi.Script)
 
 G.ArcPrimitiveScript.prototype.realize = function() {
   // Script subclasses need to implement update()
+  Vizi.Script.prototype.realize.call(this);
 
   this.strandMat = new THREE.ShaderMaterial({
     uniforms: {

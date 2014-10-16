@@ -19,8 +19,8 @@ FlightPathScript.prototype.update = function() {
 
   pointA.z = -pointA.z;
   pointB.z = -pointB.z;
-  pointA.y = 100
-  pointB.y = 100
+  pointA.y = G.camHeight
+  pointB.y = G.camHeight
   this._object.transform.position.copy(pointA);
   this._object.transform.lookAt(pointB);
   this._object.transform.rotation.y = Math.PI; // look forward

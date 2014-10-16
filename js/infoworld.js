@@ -79,6 +79,7 @@ InfoWorld.prototype.init = function(param) {
 
   G.dolly = new Vizi.Object()
   var startingPoint = G.cameraPath.getPointAt(0);
+  startingPoint.y = G.camHeight
   startingPoint.z = -startingPoint.z
   G.dolly.transform.position.copy(startingPoint)
   var flightPath = new FlightPathScript(G.cameraPath)

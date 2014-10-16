@@ -59,17 +59,17 @@ G.ClonerManager = function(){
 
 
   //FRESNAL PRIMITIVE******************
-  var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
-  var cloner = G.Cloner({
-    primitive: G.FresnalPrimitive,
-    num: 1,
-    position: new THREE.Vector3(0, 0, -100),
-    // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
-    rotRange: {start: 0, end: Math.PI * 2},
-    primitiveEffectors: [scaleEffector]
-  })
+  // var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
+  // var cloner = G.Cloner({
+  //   primitive: G.FresnalPrimitive,
+  //   num: 1,
+  //   position: new THREE.Vector3(0, 0, -100),
+  //   // posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -800, end: 0 }},
+  //   rotRange: {start: 0, end: Math.PI * 2},
+  //   primitiveEffectors: [scaleEffector]
+  // })
   
-  G.app.addObject(cloner)
+  // G.app.addObject(cloner)
 
   // scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 2, farScale: 1})
   // var cloner = G.Cloner({
