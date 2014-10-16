@@ -1,14 +1,23 @@
 G.CurveDotPrimitive = function(params) {
   var obj = new Vizi.Object;
 
-  var script = new G.CurveDotPrimitiveScript(params, obj);
+  var script = new G.CurveDotPrimitiveScript(params);
   obj.addComponent(script);
 
   return obj;
 }
 
-G.CurveDotPrimitiveScript = function(params, obj) {
+G.CurveDotPrimitiveScript = function(params) {
   Vizi.Script.call(this);
+
+  this.visible = false;
+  this.shown = false;
+}
+
+
+goog.inherits(G.CurveDotPrimitiveScript, Vizi.Script);
+
+G.CurveDotPrimitiveScript.prototype.realize = function() {
 
   this.subdivisions = 100
   this.dotScale = 0.01;
@@ -52,7 +61,7 @@ G.CurveDotPrimitiveScript = function(params, obj) {
   var visual = new Vizi.Visual({
     object: this.strand
   });
-  obj.addComponent(visual);
+  this._object.addComponent(visual);
 
   this.dot = new Vizi.Object();
   visual = new Vizi.Visual({
@@ -64,12 +73,7 @@ G.CurveDotPrimitiveScript = function(params, obj) {
 
 
   this.strand.material.attributes.opacity.needsUpdate = true
-
-  this.visible = false;
-  this.shown = false;
 }
-
-goog.inherits(G.CurveDotPrimitiveScript, Vizi.Script);
 
 G.CurveDotPrimitiveScript.prototype.update = function() {
   if (this.visible && !this.shown) {

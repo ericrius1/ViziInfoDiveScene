@@ -10,6 +10,11 @@ G.FresnalPrimitive = function(params) {
 G.FresnalPrimitiveScript = function(params, obj) {
   Vizi.Script.call(this, params);
   this.params = params;
+}
+
+goog.inherits(G.FresnalPrimitiveScript, Vizi.Script);
+
+G.FresnalPrimitiveScript.prototype.realize = function() {
 
   this._dTheta = 0.01;
   this._material = new THREE.PointCloudMaterial({
@@ -55,11 +60,11 @@ G.FresnalPrimitiveScript = function(params, obj) {
     object: pCloud
   })
 
-  obj.addComponent(visual);
+  this._object.addComponent(visual);
 
 }
 
-goog.inherits(G.FresnalPrimitiveScript, Vizi.Script)
+
 
 G.FresnalPrimitiveScript.prototype.update = function() {
 }

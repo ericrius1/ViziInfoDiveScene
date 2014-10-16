@@ -11,6 +11,14 @@ G.TracerPrimitiveScript = function(params, obj) {
   Vizi.Script.call(this, params);
   this.params = params;
 
+  this.visible = false;
+  this.shown = false;
+}
+
+goog.inherits(G.TracerPrimitiveScript, Vizi.Script);
+
+G.TracerPrimitiveScript.prototype.realize = function() {
+
   this._numSteps = 100;
   this._step = 1 / this._numSteps;
   this.strandMat = new THREE.ShaderMaterial({
@@ -61,14 +69,9 @@ G.TracerPrimitiveScript = function(params, obj) {
   var visual = new Vizi.Visual({
     object: strand
   });
-  obj.addComponent(visual);
+  this._object.addComponent(visual);
   strand.material.attributes.opacity.needsUpdate = true;
-
-  this.visible = false;
-  this.shown = false;
 }
-
-goog.inherits(G.TracerPrimitiveScript, Vizi.Script);
 
 G.TracerPrimitiveScript.prototype.update = function() {
   if (this.visible && !this.shown) {

@@ -96,8 +96,8 @@ InfoWorld.prototype.init = function(param) {
   cam.active = true;
   G.dolly.addChild(camera);
 
-  var effect = new Vizi.Effect(new THREE.BloomPass(2));
-  Vizi.Graphics.instance.addEffect(effect);
+  var effect = new Vizi.Effect(new THREE.BloomPass(1));
+//  Vizi.Graphics.instance.addEffect(effect);
 
 
   this.controller = Vizi.Prefabs.ModelController({
@@ -110,6 +110,7 @@ InfoWorld.prototype.init = function(param) {
 
   if (parameters.mode === 'cardboard') {
     // effect = new THREE.StereoEffect(G.renderer);
+    alert("Cardboard");
 
   } else {
 
