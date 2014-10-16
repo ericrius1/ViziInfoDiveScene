@@ -19,7 +19,7 @@ G.TextScript = function(params, obj){
 
   var mesh = new THREE.Mesh(new THREE.SphereGeometry(100))
   var visual = new Vizi.Visual({
-    object: mesh
+    object: textMesh
   });
   obj.addComponent(visual)
   obj.transform.position.set(0, 10, 300)
