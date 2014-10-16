@@ -26,7 +26,7 @@ G.ClonerScript.prototype.realize = function(){
 
   //we only want to wait to spawn the primitives and show them if we've specified a visibility effector, otherwise show them right away
   if(!this.params.visibilityEffector){
-
+    console.log('spawn')
     this.spawnPrimitives();
   }
 }

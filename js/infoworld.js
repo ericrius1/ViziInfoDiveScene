@@ -77,7 +77,6 @@ InfoWorld.prototype.init = function(param) {
   G.app = Vizi.Application.instance;
 
 
-
   G.dolly = new Vizi.Object()
   var startingPoint = G.cameraPath.getPointAt(0);
   startingPoint.z = -startingPoint.z
@@ -135,6 +134,7 @@ InfoWorld.prototype.init = function(param) {
   G.scene.fog = new THREE.Fog(0x00000, -4000, 80000)
 
   var cloners = new G.ClonerManager();
+  var textManager = new G.TextManager();
   // announce to JAVRIS host that we are ready to go.
   VRClient.ready();
   //Should be able to just update matrix world oncee before we start rendering, because then threejs renderer automatically calls this every frame... something with vizi?

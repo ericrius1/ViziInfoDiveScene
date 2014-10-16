@@ -59,7 +59,6 @@ G.TracerPrimitiveScript.prototype.realize = function() {
   var opacity = this.strandMat.attributes.opacity.value
   for (var j = 0; j < 1; j+=this._step) {
     var point = tracerPath.getPoint(j)
-    this._step+=.001
     strandGeometry.vertices.push(point.clone())
     opacity.push(0.0);
   }
