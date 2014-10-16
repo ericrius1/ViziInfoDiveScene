@@ -1,6 +1,8 @@
 var G = {}
 
-G.camHeight = 100;
+G.camHeight = 50;
+
+G.explodeDistance = 180
 
 G.rf = THREE.Math.randFloat;
 

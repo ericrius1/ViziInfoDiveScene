@@ -1,7 +1,8 @@
 FlightPathScript = function(flightPath) {
   Vizi.Script.call(this);
   this.flightPath = flightPath;
-  this.speedFactor = 2400000
+  // this.speedFactor = 2400000
+  this.speedFactor = 800000
 
 }
 

@@ -15,7 +15,7 @@ G.Media = function(){
   })
   mediaObj.transform.scale.multiplyScalar(startingScale)
 
-  var scaleEffector = new G.ScaleEffector( {nearDistance: 10, farDistance: 150, nearScale: endingScale, farScale: startingScale})
+  var scaleEffector = new G.ScaleEffector( {nearDistance: 10, farDistance: G.explodeDistance, nearScale: endingScale, farScale: startingScale})
   mediaObj.addComponent(visual)
   mediaObj.addComponent(scaleEffector)
   mediaObj.transform.position.y +=50

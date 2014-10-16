@@ -30,6 +30,19 @@ G.ClonerManager = function(){
   var visibilityEffector = new G.VisibilityEffector({distance: 600});
   cloner.addComponent(visibilityEffector)
   G.app.addObject(cloner)
+
+  cloner = G.Cloner({
+    primitive: G.TracerPrimitive,
+    num: 20,
+    position: new THREE.Vector3(10, 120, 200),
+    posRange: {x: {start: -200, end: 200}, y: {start: 40, end: 80}, z:{start: -300, end: 0 }},
+    scaleRange: {x: {start: 1, end: 10}, y: {start: 2, end: 3}, z:{start: 1, end: 1 }},
+    rotRange: {x: {start: 0, end: 0}, y: {start: Math.PI/2, end: Math.PI/2}, z:{start: 0, end: 0 }},
+  });
+  var visibilityEffector = new G.VisibilityEffector({distance: 600});
+  cloner.addComponent(visibilityEffector)
+  G.app.addObject(cloner)
+
   
   script = cloner.getComponent(Vizi.Script);
   script.addEventListener('distancethreshold', function(){
@@ -43,7 +56,7 @@ G.ClonerManager = function(){
   var scale;
   for(var i = 0; i < numFresnalPrimitives; i++){
     scale = G.rf(.2, .5)
-    var scaleEffector = new G.ScaleEffector( {nearDistance: 10, farDistance: 150, nearScale: G.rf(3, 20), farScale: scale})
+    var scaleEffector = new G.ScaleEffector( {nearDistance: 10, farDistance: G.explodeDistance, nearScale: G.rf(3, 20), farScale: scale})
     var cloner = G.Cloner({
       primitive: G.FresnalPrimitive,
       num: 1,
