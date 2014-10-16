@@ -103,9 +103,9 @@ InfoWorld.prototype.init = function(param) {
   this.controller = Vizi.Prefabs.ModelController({
     active: true
   })
-  this.controllerScript = this.controller.getComponent(Vizi.ModelControllerScript);
-  this.addObject(this.controller)
-  this.controllerScript.camera = cam;
+  // this.controllerScript = this.controller.getComponent(Vizi.ModelControllerScript);
+  // this.addObject(this.controller)
+  // this.controllerScript.camera = cam;
   G.scene = Vizi.Graphics.instance.scene
 
   if (parameters.mode === 'cardboard') {

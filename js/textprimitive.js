@@ -31,17 +31,16 @@ G.TextScript.prototype.realize = function() {
   this.params.position = this.params.position || new THREE.Vector3()
   this.textSpawner = new TextCreator(this.textScale)
   this.padding = 1;
+  this._stretchTime = 2000
 
   var textMesh = this.textSpawner.createMesh(this.params.string, {});
 
   var mesh = new THREE.Mesh(new THREE.SphereGeometry(100))
-  var visual = new Vizi.Visual({
+  this.textVisual = new Vizi.Visual({
     object: textMesh
   });
-  this._object.addComponent(visual)
   this._object.transform.position.copy(this.params.position)
   this._object.transform.scale.set(10, 10, 10)
-  this._object.transform.visible = false
   this._object.transform.lookAt(G.dolly.transform.position)
 
   var helper = new THREE.BoundingBoxHelper(textMesh, 0xff00ff)
@@ -66,12 +65,11 @@ G.TextScript.prototype.realize = function() {
 
   var line = new THREE.Line(lineGeo, lineMat);
 
-  visual = new Vizi.Visual({
+  this.lineVisual = new Vizi.Visual({
     object: line
   })
-  line.translateX(-width/2)
-  line.translateY(-height/2)
-  this._object.addComponent(visual)
+  line.translateX(-width / 2)
+  line.translateY(-height / 2)
 }
 
 G.TextScript.prototype.update = function() {
@@ -79,6 +77,25 @@ G.TextScript.prototype.update = function() {
 }
 
 G.TextScript.prototype.appear = function() {
-  this._object.transform.visible = true;
+  this._object.addComponent(this.textVisual)
+  this._object.addComponent(this.lineVisual)
+  //scale object really small so user doesnt see flicker before tween takes over
+  this._object.transform.scale.x = 0.0001
+  this._object.transform.scale.y = 0.0001
+  var csd = {
+    scaleX: 0.001,
+    scaleY: 0.001
+  }
+
+  var fsd = {
+    scaleX: 1,
+    scaleY: 1
+  }
+
+  var stretchTween = new TWEEN.Tween(csd).
+  to(fsd, this._stretchTime).
+  onUpdate(function() {
+    this._object.transform.scale.set(csd.scaleX, csd.scaleY, 1)
+  }.bind(this)).start()
 
 }
