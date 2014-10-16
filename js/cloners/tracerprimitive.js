@@ -1,7 +1,26 @@
 G.TracerPrimitive = function(params) {
+  var obj = new Vizi.Object;
+
+  var script = new G.TracerPrimitiveScript(params, obj);
+  obj.addComponent(script);
+
+  return obj;
+}
+
+G.TracerPrimitiveScript = function(params, obj) {
+  Vizi.Script.call(this, params);
+  this.params = params;
+
+  this.visible = false;
+  this.shown = false;
+}
+
+goog.inherits(G.TracerPrimitiveScript, Vizi.Script);
+
+G.TracerPrimitiveScript.prototype.realize = function() {
+
   this._numSteps = 100;
   this._step = 1 / this._numSteps;
-  Vizi.Object.call(this)
   this.strandMat = new THREE.ShaderMaterial({
     uniforms: {
       color: {
@@ -50,17 +69,22 @@ G.TracerPrimitive = function(params) {
   var visual = new Vizi.Visual({
     object: strand
   });
-  this.addComponent(visual);
-  strand.material.attributes.opacity.needsUpdate = true
+  this._object.addComponent(visual);
+  strand.material.attributes.opacity.needsUpdate = true;
 }
 
-goog.inherits(G.TracerPrimitive, Vizi.Object);
-
-G.TracerPrimitive.prototype.appear= function(vertexIndex) {
-  this.growStrand(0);
+G.TracerPrimitiveScript.prototype.update = function() {
+  if (this.visible && !this.shown) {
+    this.growStrand(0);
+    this.shown = true;
+  }
 }
 
-G.TracerPrimitive.prototype.growStrand = function(vertexIndex){
+G.TracerPrimitiveScript.prototype.appear = function(vertexIndex) {
+  this.visible = true;
+}
+
+G.TracerPrimitiveScript.prototype.growStrand = function(vertexIndex){
   var opacity = this.strandMat.attributes.opacity;
   opacity.value[vertexIndex++] = 1;
   opacity.needsUpdate = true

@@ -18,7 +18,7 @@ G.ClonerManager = function(){
  
   var visibilityEffector = new G.VisibilityEffector({distance: 600});
   var primitiveVisibilityEffector = new G.VisibilityEffector({distance: 200});
-  var cloner = new G.Cloner({
+  var cloner = G.Cloner({
     primitive: G.ArcPrimitive,
     num: 10,
     position: new THREE.Vector3(-10, 0, 300),
@@ -27,20 +27,25 @@ G.ClonerManager = function(){
     rotRange: {start: 0, end: Math.PI * 2},
     primitiveEffectors: [primitiveVisibilityEffector]
   })
-  cloner.addComponent(visibilityEffector)
-  G.app.addObject(cloner)
-  cloner.addEventListener('distancethreshold', function(){
+
+  cloner.addComponent(visibilityEffector);
+  G.app.addObject(cloner);
+
+  var script = cloner.getComponent(Vizi.Script);
+  script.addEventListener('distancethreshold', function(){
     this.spawnPrimitives();
   })
 
   var visibilityEffector = new G.VisibilityEffector({distance: 100})
+
   var text = new G.TextPrimitive({
     string: "hello",
     position: new THREE.Vector3(0, 0, 200)
   })
   G.app.addObject(text)
 
-  cloner = new G.Cloner({
+
+  cloner = G.Cloner({
     primitive: G.TracerPrimitive,
     num: 20,
     position: new THREE.Vector3(10, 0, 200),
@@ -50,7 +55,9 @@ G.ClonerManager = function(){
   var visibilityEffector = new G.VisibilityEffector({distance: 600});
   cloner.addComponent(visibilityEffector)
   G.app.addObject(cloner)
-  cloner.addEventListener('distancethreshold', function(){
+  
+  script = cloner.getComponent(Vizi.Script);
+  script.addEventListener('distancethreshold', function(){
     this.spawnPrimitives();
   })
 
@@ -58,7 +65,7 @@ G.ClonerManager = function(){
 
   //FRESNAL PRIMITIVE******************
   var scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 10, farScale: 1})
-  var cloner = new G.Cloner({
+  var cloner = G.Cloner({
     primitive: G.FresnalPrimitive,
     num: 1,
     position: new THREE.Vector3(0, 0, -100),
@@ -70,7 +77,7 @@ G.ClonerManager = function(){
   G.app.addObject(cloner)
 
   scaleEffector = new G.ScaleEffector( {nearDistance: 50, farDistance: 400, nearScale: 2, farScale: 1})
-  var cloner = new G.Cloner({
+  var cloner = G.Cloner({
     primitive: G.CurveDotPrimitive,
     num: 1,
     position: new THREE.Vector3(0, 0, 200),
