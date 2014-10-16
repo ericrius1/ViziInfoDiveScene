@@ -22,7 +22,8 @@ G.TextScript = function(params, obj){
     object: textMesh
   });
   obj.addComponent(visual)
-  obj.transform.position.set(0, 10, 300)
+  obj.transform.position.set(0, 10, 150)
+  obj.transform.scale.set(10, 10, 10)
 
 }
 

@@ -19,6 +19,8 @@ goog.inherits(G.TracerPrimitiveScript, Vizi.Script);
 
 G.TracerPrimitiveScript.prototype.realize = function() {
 
+  Vizi.Script.prototype.realize.call(this);
+  
   this._numSteps = 100;
   this._step = 1 / this._numSteps;
   this.strandMat = new THREE.ShaderMaterial({
