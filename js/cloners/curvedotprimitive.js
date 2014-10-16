@@ -19,6 +19,8 @@ goog.inherits(G.CurveDotPrimitiveScript, Vizi.Script);
 
 G.CurveDotPrimitiveScript.prototype.realize = function() {
 
+  Vizi.Script.prototype.realize.call(this);
+  
   this.subdivisions = 100
   this.dotScale = 0.01;
   this.percentFullScale = .1 // dot will be full scale by 10% of curve

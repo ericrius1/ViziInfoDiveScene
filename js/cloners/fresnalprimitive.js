@@ -16,6 +16,8 @@ goog.inherits(G.FresnalPrimitiveScript, Vizi.Script);
 
 G.FresnalPrimitiveScript.prototype.realize = function() {
 
+  Vizi.Script.prototype.realize.call(this);
+  
   this._dTheta = 0.01;
   this._material = new THREE.PointCloudMaterial({
     color: _.sample(G.colorPalette)
