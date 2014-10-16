@@ -19,7 +19,7 @@ goog.inherits(G.TracerPrimitiveScript, Vizi.Script);
 
 G.TracerPrimitiveScript.prototype.realize = function() {
 
-  this._numSteps = 10;
+  this._numSteps = 100;
   this._step = 1 / this._numSteps;
   this.strandMat = new THREE.ShaderMaterial({
     uniforms: {
@@ -41,7 +41,6 @@ G.TracerPrimitiveScript.prototype.realize = function() {
     depthWrite: false
   });
 
-  var SUBDIVISIONS = 100;
 
   var strandGeometry = new THREE.Geometry()
   var points = [];
@@ -60,6 +59,7 @@ G.TracerPrimitiveScript.prototype.realize = function() {
   var opacity = this.strandMat.attributes.opacity.value
   for (var j = 0; j < 1; j+=this._step) {
     var point = tracerPath.getPoint(j)
+    this._step+=.001
     strandGeometry.vertices.push(point.clone())
     opacity.push(0.0);
   }
