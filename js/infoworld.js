@@ -8,6 +8,7 @@ var parameters = (function() {
   return parameters;
 })();
 
+
 InfoWorld = function(param) {
   Vizi.Application.call(this, param);
 
@@ -38,6 +39,12 @@ InfoWorld = function(param) {
 
   });
 
+  G.loader.addLoad();
+  var texture = THREE.ImageUtils.loadTexture('images/snowcrash.jpg', THREE.Texture.DEFAULT_MAPPING, function(img) {
+    G.snowCrash = img;
+    G.loader.onLoad()
+  })
+
   var objLoader = new THREE.ObjectLoader();
   G.loader.addLoad();
   objLoader.load('models/ID-scene-2.json', function(sceneObj) {
@@ -47,7 +54,13 @@ InfoWorld = function(param) {
     surface = sceneObj.getObjectByName('surface', true)
     surface.children[0].material.wireframe = true;
     surface.children[0].material.transparent = true;
-    surface.children[0].material.opacity = 0.05;
+    sceneObj.traverse(function(node) {
+      if (node.material) {
+        node.material.transparent = true
+        node.material.opacity = 0.1
+      }
+    })
+    surface.children[0].material.opacity = 0.1;
     // surface.children[0].scale.z = 100
 
   });
@@ -73,6 +86,8 @@ goog.inherits(InfoWorld, Vizi.Application)
 InfoWorld.prototype.init = function(param) {
   //tracker obj 
 
+  var stream = new Stream('audio/infantasia.mp3', G.audioController)
+  stream.play()
 
   G.app = Vizi.Application.instance;
 
@@ -96,8 +111,8 @@ InfoWorld.prototype.init = function(param) {
   cam.active = true;
   G.dolly.addChild(camera);
 
-  var effect = new Vizi.Effect(new THREE.BloomPass(1));
-//  Vizi.Graphics.instance.addEffect(effect);
+  // var effect = new Vizi.Effect(new THREE.BloomPass(.1));
+  // Vizi.Graphics.instance.addEffect(effect);
 
 
   this.controller = Vizi.Prefabs.ModelController({
@@ -136,6 +151,7 @@ InfoWorld.prototype.init = function(param) {
 
   var cloners = new G.ClonerManager();
   var textManager = new G.TextManager();
+  var media = new G.Media();
   // announce to JAVRIS host that we are ready to go.
   VRClient.ready();
   //Should be able to just update matrix world oncee before we start rendering, because then threejs renderer automatically calls this every frame... something with vizi?

@@ -1,28 +1,30 @@
 G.TextManager = function() {
 
-
+  var textHeight = G.camHeight + 2
+  var textZPos = 300
+  var textZInc = 30
   var text = new G.TextPrimitive({
     string: "Welcome",
-    position: new THREE.Vector3(-3, G.camHeight, 350)
+    position: new THREE.Vector3(-3, textHeight, textZPos-=textZInc)
   })
   G.app.addObject(text)
 
 
   var text = new G.TextPrimitive({
-    string: "To",
-    position: new THREE.Vector3(3, G.camHeight, 330)
+    string: "to",
+    position: new THREE.Vector3(3, textHeight, textZPos-=textZInc)
   })
   G.app.addObject(text)
 
   var text = new G.TextPrimitive({
-    string: "The",
-    position: new THREE.Vector3(-3, G.camHeight, 310)
+    string: "the",
+    position: new THREE.Vector3(-3, textHeight, textZPos-=textZInc)
   })
   G.app.addObject(text)
 
   var text = new G.TextPrimitive({
-    string: "Mettaverse",
-    position: new THREE.Vector3(3, G.camHeight, 290)
+    string: "MettaVerse",
+    position: new THREE.Vector3(3, textHeight, textZPos-=textZInc)
   })
   G.app.addObject(text)
 

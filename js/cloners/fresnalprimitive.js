@@ -25,7 +25,7 @@ G.FresnalPrimitiveScript.prototype.realize = function() {
   var geometry = new THREE.Geometry();
   var R = 100
 
-  for (var y = 0; y < 100; y += 1) {
+  for (var y = 0; y < R; y += 1) {
     for (var theta = 0; theta < Math.PI / 2;) {
       var radius = Math.sqrt(R * R - y * y);
       var x = radius * Math.cos(theta);
