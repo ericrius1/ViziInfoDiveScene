@@ -93,6 +93,7 @@ G.TextScript.prototype.appear = function() {
 
   var stretchTween = new TWEEN.Tween(csd).
   to(fsd, this._stretchTime).
+  easing(TWEEN.Easing.Quadratic.InOut).
   onUpdate(function() {
     this._object.transform.scale.set(csd.scaleX, csd.scaleY, 1)
   }.bind(this)).start()
