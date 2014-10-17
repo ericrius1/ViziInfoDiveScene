@@ -86,20 +86,20 @@ G.ClonerManager = function(){
 
   // G.app.addObject(cloner)
 
-  // var visibilityEffector = new G.VisibilityEffector({distance: 600});
-  // var primitiveVisibilityEffector = new G.VisibilityEffector({distance: 200});
-  // var cloner = G.Cloner({
-  //   primitive: G.ArcPrimitive,
-  //   num: 10,
-  //   position: new THREE.Vector3(-10, 0, 300),
-  //   posRange: {x: {start: -200, end: -20}, y: {start: 0, end: 0}, z:{start: -300, end: 0 }},
-  //   scaleRange: { x: {start: 1, end: 2}, y: {start: 1, end: 10}, z:{start: 1, end: 2 }},
-  //   rotRange: {start: 0, end: Math.PI * 2},
-  //   primitiveEffectors: [primitiveVisibilityEffector]
-  // })
+  var visibilityEffector = new G.VisibilityEffector({distance: 600});
+  var primitiveVisibilityEffector = new G.VisibilityEffector({distance: 200});
+  var cloner = G.Cloner({
+    primitive: G.ArcPrimitive,
+    num: 100,
+    position: new THREE.Vector3(0, 0, 300),
+    posRange: {x: {start: -200, end: 200}, y: {start: 0, end: 0}, z:{start: -300, end: 300 }},
+    scaleRange: { x: {start: 1, end: 2}, y: {start: 1, end: 4}, z:{start: 1, end: 2 }},
 
-  // cloner.addComponent(visibilityEffector);
-  // G.app.addObject(cloner);
+    primitiveEffectors: [primitiveVisibilityEffector]
+  })
+
+  cloner.addComponent(visibilityEffector);
+  G.app.addObject(cloner);
 
   // var script = cloner.getComponent(Vizi.Script);
   // script.addEventListener('distancethreshold', function(){

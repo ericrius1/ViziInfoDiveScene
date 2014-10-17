@@ -21,6 +21,7 @@ goog.inherits(G.ArcPrimitiveScript, Vizi.Script)
 G.ArcPrimitiveScript.prototype.realize = function() {
   // Script subclasses need to implement update()
   Vizi.Script.prototype.realize.call(this);
+  this.growTime = G.rf(20, 100)
 
   this.strandMat = new THREE.ShaderMaterial({
     uniforms: {
@@ -87,5 +88,5 @@ G.ArcPrimitiveScript.prototype.growStrand = function(vertexIndex){
 
   setTimeout(function() {
     this.growStrand(vertexIndex);
-  }.bind(this), 30)
+  }.bind(this), this.growTime)
 }

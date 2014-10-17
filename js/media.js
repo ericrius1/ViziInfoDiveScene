@@ -3,7 +3,8 @@ G.Media = function(){
   var planeGeo = new THREE.PlaneGeometry(1024, 692)
   var mat = new THREE.MeshBasicMaterial({
     color: 0xffffff,
-    map: G.snowCrash
+    map: G.snowCrash,
+    side: THREE.DoubleSide
   })
   var mesh = new THREE.Mesh(planeGeo, mat)
 

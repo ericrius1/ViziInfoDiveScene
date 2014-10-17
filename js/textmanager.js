@@ -37,13 +37,13 @@ G.TextManager = function() {
 
   var text = new G.TextPrimitive({
     string: "What's the difference?",
-    position: new THREE.Vector3(0, textHeight, -50)
+    position: new THREE.Vector3(0, textHeight, textZPos-=textZInc)
   })
   G.app.addObject(text)
 
   var text = new G.TextPrimitive({
     string: "Welcome to the Metaverse",
-    position: new THREE.Vector3(0, textHeight- 2, -150)
+    position: new THREE.Vector3(0, textHeight- 2, -50)
   })
   G.app.addObject(text)
 
