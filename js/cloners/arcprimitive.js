@@ -21,7 +21,7 @@ goog.inherits(G.ArcPrimitiveScript, Vizi.Script)
 G.ArcPrimitiveScript.prototype.realize = function() {
   // Script subclasses need to implement update()
   Vizi.Script.prototype.realize.call(this);
-  this.growTime = G.rf(20, 100)
+  this.growTime = G.rf(10, 111)
 
   this.strandMat = new THREE.ShaderMaterial({
     uniforms: {
@@ -43,7 +43,7 @@ G.ArcPrimitiveScript.prototype.realize = function() {
     depthWrite: false
   });
 
-  var SUBDIVISIONS = 100;
+  var SUBDIVISIONS = 300;
 
   var strandGeometry = new THREE.Geometry()
   var curve = new THREE.QuadraticBezierCurve3();

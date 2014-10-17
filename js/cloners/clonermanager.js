@@ -21,7 +21,7 @@ G.ClonerManager = function(){
   // ************ TRACER PRIMITIVE **********
   cloner = G.Cloner({
     primitive: G.TracerPrimitive,
-    num: 20,
+    num: 40,
     position: new THREE.Vector3(10, 0, 200),
     posRange: {x: {start: -200, end: 200}, y: {start: 40, end: 80}, z:{start: -300, end: 0 }},
     scaleRange: {x: {start: 1, end: 10}, y: {start: 2, end: 3}, z:{start: 1, end: 1 }},
@@ -33,7 +33,7 @@ G.ClonerManager = function(){
 
   cloner = G.Cloner({
     primitive: G.TracerPrimitive,
-    num: 20,
+    num: 40,
     position: new THREE.Vector3(10, 120, 200),
     posRange: {x: {start: -200, end: 200}, y: {start: 40, end: 80}, z:{start: -300, end: 0 }},
     scaleRange: {x: {start: 1, end: 10}, y: {start: 2, end: 3}, z:{start: 1, end: 1 }},

@@ -20,7 +20,7 @@ goog.inherits(G.TracerPrimitiveScript, Vizi.Script);
 G.TracerPrimitiveScript.prototype.realize = function() {
 
   Vizi.Script.prototype.realize.call(this);
-  this.growTime = G.rf(10, 30)
+  this.growTime = G.rf(10, 100)
   this._numSteps = 1000;
   this._step = 1 / this._numSteps;
   this.strandMat = new THREE.ShaderMaterial({
