@@ -87,7 +87,7 @@ InfoWorld.prototype.init = function(param) {
   //tracker obj 
 
   var stream = new Stream('audio/infantasia.mp3', G.audioController)
-  stream.play()
+  // stream.play()
 
   G.app = Vizi.Application.instance;
 

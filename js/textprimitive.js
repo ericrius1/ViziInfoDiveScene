@@ -5,7 +5,7 @@ G.TextPrimitive = function(params) {
   var textScript = new G.TextScript(params, textPrimitive);
   textPrimitive.addComponent(textScript);
   var visibilityEffector = new G.VisibilityEffector({
-    distance: 50
+    distance: 80
   })
   textPrimitive.addComponent(visibilityEffector);
   visibilityEffector.addEventListener('distancethreshold', function() {
@@ -30,17 +30,16 @@ G.TextScript.prototype.realize = function() {
   this.textScale = 5;
   this.params.position = this.params.position || new THREE.Vector3()
   this.textSpawner = new TextCreator(this.textScale)
-  this.padding = 1;
+  this.padding = 2;
   this._stretchTime = 2000
 
   var textMesh = this.textSpawner.createMesh(this.params.string, {});
-
+  textMesh.scale.multiplyScalar(4)
   var mesh = new THREE.Mesh(new THREE.SphereGeometry(100))
   this.textVisual = new Vizi.Visual({
     object: textMesh
   });
   this._object.transform.position.copy(this.params.position)
-  this._object.transform.scale.set(10, 10, 10)
   this._object.transform.lookAt(G.dolly.transform.position)
 
   var helper = new THREE.BoundingBoxHelper(textMesh, 0xff00ff)
